@@ -1,0 +1,10 @@
+# JS
+node_modules/
+
+# System/Editor directories and files
+.DS_Store
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
