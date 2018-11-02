@@ -1,5 +1,5 @@
-const log4js = require('log4js');
-let programName = "log";
+let log4js = require('log4js');
+let programName = "log4jstest";
 
 log4js.configure({
     appenders: {
@@ -22,22 +22,12 @@ log4js.configure({
             //compress : true,//（默认为false） - 在滚动期间压缩备份文件（备份文件将具有.gz扩展名）
             pattern: "-yyyy-MM-dd-hh.log", //（可选，默认为.yyyy-MM-dd） - 用于确定何时滚动日志的模式。格式:.yyyy-MM-dd-hh:mm:ss.log
             encoding: 'utf-8', //default "utf-8"，文件的编码
-        },
-        error_file: { //：记录器4：输出到error log
-            type: "dateFile",
-            filename: __dirname + `/../logs/${programName}_error`, //您要写入日志文件的路径
-            alwaysIncludePattern: true, //（默认为false） - 将模式包含在当前日志文件的名称以及备份中
-            daysToKeep: 10, //时间文件 保存多少天，距离当前天daysToKeep以前的log将被删除
-            //compress : true,//（默认为false） - 在滚动期间压缩备份文件（备份文件将具有.gz扩展名）
-            pattern: "_yyyy-MM-dd.log", //（可选，默认为.yyyy-MM-dd） - 用于确定何时滚动日志的模式。格式:.yyyy-MM-dd-hh:mm:ss.log
-            encoding: 'utf-8', //default "utf-8"，文件的编码
-            // compress: true, //是否压缩
         }
     },
     categories: {
         default: {
-            appenders: ['console','data_file', 'log_file'],
-            level: 'info'
+            appenders: ['data_file', 'console', 'log_file'],
+            level: 'ALL'
         }, //默认log类型，输出到控制台 log文件 log日期文件 且登记大于info即可
         production: {
             appenders: ['data_file'],
@@ -50,13 +40,19 @@ log4js.configure({
         debug: {
             appenders: ['console', 'log_file'],
             level: 'debug'
-        }, //调试环境 输出到log文件和控制台    
-        error_log: {
-            appenders: ['error_file'],
-            level: 'error'
-        } //error 等级log 单独输出到error文件中 任何环境的errorlog 将都以日期文件单独记录
+        }, //调试环境 输出到log文件和控制台 
     },
 });
 
 module.exports = log4js.getLogger('default');
-// module.exports.error = log4js.getLogger('error_log'); //error单独输出到一个文件中
+
+
+// logger.all("日志 all");
+// logger.trace("日志 trace");
+// logger.debug("日志 debug");
+// logger.info("日志 info");
+// logger.warn("日志 warn");
+// logger.error("日志 error");
+// logger.fatal("日志 fatal");
+// logger.mark("日志 mark");
+// logger.off("日志 off");
